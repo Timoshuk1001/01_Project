@@ -284,3 +284,7 @@ input:checked + label:after {
     font-size: 16px;
     color: #6a6666;
 }
+
+.temp {
+
+}
