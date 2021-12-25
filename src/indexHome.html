@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="styleAbout.css">
+    <link rel="stylesheet" href="styleHome.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <title>Junior Specialists</title>
 </head>
@@ -27,10 +27,20 @@
         <a class="menu__item menu__m2" href="indexQuestions.html">questions</a>
         <a class="menu__item menu__m3" href="indexAbout.html">about</a>
     </nav>
-    <main class="main">
-        <div class="list"></div>
-    </main>
 
+    <div id="developers"></div>
+    <br>
+
+ <form id="edit-dev" style="display: none">
+        <input type="hidden" value="" id="edit-id">
+        <input type="text" name="name" id="edit-name"><br>
+        <input type="number" name="age" id="edit-age"><br>
+        <input type="submit">
+    </form>
+
+
+
+    <script src="script.js"></script>
 </div>
 </body>
 </html>
