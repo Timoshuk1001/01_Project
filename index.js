@@ -42,12 +42,12 @@ app.get('/developers', (req, res) => {
 app.post('/developers', urlencodedParser, (req, res) => {
   if(!req.body) return res.sendStatus(400);
 
-  const { id, name, age } = req.body;
+  const { id, avatar, name, age, gender, city, activity, company, interests } = req.body;
   
   const developers = JSON.parse(fs.readFileSync('./developers.json', 'utf8'));
 
   developers[id] = {
-    id, name, age,
+    id, avatar, name, age, gender, city, activity, company, interests
   }
 
   fs.writeFileSync('./developers.json', JSON.stringify(developers), 'utf8');
