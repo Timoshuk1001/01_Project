@@ -7,8 +7,8 @@ body {
     background-image: linear-gradient(90deg, #096193, #f6ed3f, #ef2b39);
 }
 .wrapper {
-    height: 900px;
-    width: 900px;
+    height: 1200px;
+    width: 1200px;
     background: rgba(201, 201, 201, 0.58);
     margin: 0 auto;
 }
