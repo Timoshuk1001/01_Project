@@ -27,12 +27,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // HTML, JS
 
 app.get('/', (req, res) => {
-  const index = fs.readFileSync('./src/indexHome.html', 'utf8');
+  const index = fs.readFileSync('./dist/indexHome.html', 'utf8');
   res.send(index);
 });
 
 app.get('/script.js', (req, res) => {
-  const index = fs.readFileSync('./script.js', 'utf8');
+  const index = fs.readFileSync('./dist/script.js', 'utf8');
   res.send(index);
 });
 
@@ -41,7 +41,7 @@ app.get('/uploads/:filename', (req, res) => {
   res.sendFile(__dirname + req.path);
 });
 
-app.use(express.static("src"));
+app.use(express.static("dist"));
 
 
 // Data
