@@ -10,6 +10,8 @@ const activityInput = document.getElementById('edit-activity')
 const companyInput = document.getElementById('edit-company')
 const interestsInput = document.getElementById('edit-interests')
 const form = document.getElementById('edit-dev');
+const formWrap = document.querySelector('.edit-dev-wrap')
+const submitAndCloseBtn = document.querySelector('.submit-and-close')
 
 
 function loadData() {
@@ -32,11 +34,18 @@ loadData();
 
 function renderCards(data) {
   const cards = data.map((dev) => {
-    const avatarEl = dev.avatar ? `<img src="${dev.avatar}" class="avatar" width="200" height="200">` : '';
+    const avatarEl = dev.avatar ? `<img src="${dev.avatar}" class="avatar" width="300" height="300">` : '';
 
-    return `${avatarEl}<div class="name">${dev.name}</div><b class="age">${dev.age}</b><div class="gender">${dev.gender}</div>
-<div class="city">${dev.city}</div><div class="activity">${dev.activity}</div><div class="company">${dev.company}</div>
-<div class="interests">${dev.interests}</div><button onclick="editData(${dev.id})">edit</button>`
+    return `<div class="card">
+
+                <div class="photo"><div>${avatarEl}</div></div>
+                <div class="describe">
+                    <div class="name">${dev.name}</div><div class="age">${dev.age}</div><div class="gender">${dev.gender}</div>
+                    <div class="city">${dev.city}</div><div class="activity">${dev.activity}</div><div class="company">${dev.company}</div>
+                    <div class="interests">${dev.interests}</div><button class="edit-btn" onclick="editData(${dev.id})"><img src="image/pngegg.png" width="30px" alt=""></button>
+                </div>
+                
+            </div>`
   }).join('');
 
   developers.innerHTML = cards;
@@ -54,6 +63,7 @@ function editData(id) {
   companyInput.value = dev.company;
   interestsInput.value = dev.interests;
   idInput.value = dev.id;
+  formWrap.classList.add('active')
   form.style.display = 'block';
 }
 
@@ -68,5 +78,9 @@ form.addEventListener('submit', (e) => {
     form.style.display = 'none';
   });
   
-})
+});
+
+submitAndCloseBtn.addEventListener('click',() =>{
+  formWrap.classList.remove('active');
+});
 
