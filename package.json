@@ -6,18 +6,28 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "cmd": "gulp",
+    "build": "yarn cmd default",
+    "watch": "yarn cmd watch"
   },
   "keywords": [],
-  "author": "",
+  "author": "Anna Poltavchenko <annapolt1@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.1",
     "cors": "^2.8.5",
+    "del": "^6.0.0",
     "express": "^4.17.2",
-    "multer": "^1.4.4"
+    "gulp": "^4.0.2",
+    "gulp-image": "^6.3.1",
+    "gulp-sass": "^5.0.0",
+    "multer": "^1.4.4",
+    "sass": "^1.45.1"
   },
   "devDependencies": {
+    "@types/gulp": "^4.0.9",
     "nodemon": "^2.0.15"
-  }
+  },
+  "repository": "https://github.com/Timoshuk1001/01_Project-test"
 }

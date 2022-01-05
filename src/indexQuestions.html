@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="width=device-width">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,  initial-scale=1.0">
     <title>Junior Specialists</title>
     <link rel="stylesheet" href="styleQuestions.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
@@ -11,6 +11,7 @@
 </head>
 <body>
 <div class="wrapper">
+    <div class="container">
     <header class="header">
         <div class="header__list">
             <div class="header__logo">
@@ -26,82 +27,41 @@
         <a class="menu__item menu__m2" href="indexQuestions.html">questions</a>
         <a class="menu__item menu__m3" href="indexAbout.html">about</a>
     </nav>
+
     <div class="selects__wrapp">
-        <div class="selects">
-            <select class="select__file-system" id="selectorFile">
-                <option value="sistem 0">Select file system</option>
-                <option value="sistem 1">CSV</option>
-                <option value="sistem 2">JSON</option>
-                <option value="sistem 3">XML</option>
-                <option value="sistem 4">YAML</option>
-            </select>
-            <select class="select__question-theme" id="selectorQuestion">
-                <option value="theme 0">Select question theme</option>
-                <option value="theme 1">Мета-теги</option>
-                <option value="theme 2">Unit-тесты</option>
-                <option value="theme 3">Элемент HTML &lt;input&gt;</option>
-                <option value="theme 4">Схлопывающиеся margin</option>
-                <option value="theme 5">Псевдоэлементы ::after и ::before</option>
-            </select>
-        </div>
 
+            <div class="selects">
+                <select class="select__file-system" id="selectorFile">
+                    <option value="sistem 0">Select file system</option>
+                    <option value="sistem 1">CSV</option>
+                    <option value="sistem 2">JSON</option>
+                    <option value="sistem 3">XML</option>
+                    <option value="sistem 4">YAML</option>
 
+                </select>
 
-        <a href="#popup" class="popup_button-plus">+</a>
+                <select class="select__question-theme" id="selectorQuestion">
+                    <option value="theme 0">Select question theme</option>
+                    <option value="theme 1">Meta-Tags</option>
+                    <option value="theme 2">Unit-Test</option>
+                    <option value="theme 3">Element HTML</option>
+                    <option value="theme 4">Margin Collapsing</option>
+                    <option value="theme 5">Pseudo-element ::after & ::before</option>
+                </select>
+            </div>
+
+        <a  class="button" href="#" id="open_pop_up">Добавить вопрос</a>
     </div>
 
 
-    <div id="popup" class="popup">
-        <a href="#wrapper" class="popup__area"></a>
-        <div class="popup__body">
-            <a href="#" class="popup__close">×</a>
-            <label for="question">Question: </label><br>
-            <input class="textQuestion" type="text" size="40" id="question" autocomplete = "off" maxlength="255">
-            <form action="themePopUp" method="post">
-                <div class="selector">
-                    <label for="themePopUp">Theme: </label>
-                    <p><select class="listSelector" id="themePopUp">
-                        <option value="theme 0">Select one theme</option>
-                        <option value="theme 1">Мета-теги</option>
-                        <option value="theme 2">Unit-тесты</option>
-                        <option value="theme 3">Элемент HTML &lt;input&gt;</option>
-                        <option value="theme 4">Схлопывающиеся margin</option>
-                        <option value="theme 5">Псевдоэлементы ::after и ::before</option>
-                    </select></p>
-                </div>
-            </form>
-
-            <label for="theme">Answer : </label>
-            <div class="radio">
-                <div class="radio__firstRadio">
-                    <input id="fid-1" type="radio" name="radio" value="off" checked>
-                    <label for="fid-1"></label>
-                    <p>True</p>
-                </div>
-                <div class="radio__secondRadio">
-                    <input id="fid-2" type="radio" name="radio" value="off">
-                    <label for="fid-2"></label>
-                    <p>False</p>
-                </div>
-            </div>
 
 
-            <br>
-            <label for="theme">File system: </label>
-            <div class="checkbox">
-                <label class="circul-checkbox" tabindex="1"><input type="checkbox" name="checkbox">CSV</label>
-                <label class="circul-checkbox" tabindex="2"><input type="checkbox" name="checkbox">JSON</label>
-                <label class="circul-checkbox" tabindex="3"><input type="checkbox" name="checkbox">XML</label>
-                <label class="circul-checkbox" tabindex="4"><input type="checkbox" name="checkbox">YAML</label>
-            </div>
-            <div class="button__footer">
-                <button class="button__footer--close">cancel</button>
-                <button class="button__footer--create">create</button>
-            </div>
 
 
-        </div>
-    </div>
+
+
+
+
 
 
     <div class="list">
@@ -109,31 +69,65 @@
         <h4 id="ifNoQuestion">There are no questions</h4>
     </div>
 
+</div>
+</div>
+<div class="pop_up" id="pop_up">
+    <a href="#wrapper" class="popup__area"></a>
+    <!--        method="post"-->
+    <form id="edit-form" name="main">
+        <div class="pop_up_container">
+            <div class="pop_up_body" id="pop_up_body">
+                <label class="file__question"><h3>Question:</h3></label><br>
+
+                <textarea class="pop_up_question" maxlength="255" type="text" name="nameInput" placeholder="Введите ваш вопрос..." autocomplete="off"></textarea>
+                <div class="text__area">
+                    <div class="texrarea__counter"> Осталось <span></span> символов
+                    </div>
+                </div>
+
+                <div class="selector">
+                    <label class="file__theme"><h3>Theme:</h3></label>
+                    <p><select class="listSelector">
+                        <option value="theme 0">Select one theme</option>
+                        <option value="Meta-Tags">Meta-Tags</option>
+                        <option value="Unit Test">Unit-Test</option>
+                        <option value="Element HTML">Element HTML</option>
+                        <option value="Margin Collapsing">Margin Collapsing</option>
+                        <option value="Pseudo-element ::after & ::before">Pseudo-element ::after & ::before</option>
+                    </select></p>
+                </div>
+                <br>
+                <label class="radio__answer"><h3>Answer :</h3></label>
+                <div class="radio">
+                    <label class="radio__firstRadio"><input class="radio" value="True" type="radio" name="1">True</label>
+                    <label class="radio__secondRadio"><input  class="radio" value="False"  type="radio" name="1">False</label>
+                </div>
+                <div class="error"></div>
+                <br>
+
+                <label class="file__system"><h3>File system:</h3></label>
+                <div class="checkbox">
+                    <label class="circul-checkbox" tabindex="1"><input class="checkbox" type="checkbox" name="checkbox" value="1">CSV</label>
+                    <label class="circul-checkbox" tabindex="2"><input class="checkbox" type="checkbox" name="checkbox" value="2">JSON</label>
+                    <label class="circul-checkbox" tabindex="3"><input class="checkbox" type="checkbox" name="checkbox" value="3">XML</label>
+                    <label class="circul-checkbox" tabindex="4"><input class="checkbox" type="checkbox" name="checkbox" value="4">YAML</label>
+                </div>
 
 
 
+                <div class="button__footer">
+                    <button class="btn--cancel" type="button">cancel</button>
+                    <button class="btn--create" type="submit">create</button>
+                </div>
+                <div class="pop_up_close" id="pop_up_close">&#10006</div>
 
-
-
-
-
-    <!--
-      ДЛЯ КОДА ВЫЗОВ
-      <a href="#" style="height:20px;width:100px" class="cancelButton">cancel</a>
-          <form onsubmit="alert('submit!');return false">
-            <input stile="height:20px;width:100px" type="submit" value="create" onclick="alert('click')">
-           </form>-->
-
-
-
-
-
-
-
-
-
+            </div>
+        </div>
+    </form>
 </div>
 
-<script src="/src/scriptQuestions.jss.js"></script>
+<script src="scriptQuestionAllField.js"></script>
+<script src="scriptQuestions.js"></script>
+<script src="scriptQuestionCreateAndClose.js"></script>
 </body>
 </html>

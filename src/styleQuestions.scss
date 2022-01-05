@@ -1,0 +1,278 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-image: linear-gradient(90deg, #096193, #f6ed3f, #ef2b39);
+
+}
+
+.wrapper {
+
+    max-width: 1200px;
+    overflow: hidden;
+    margin: 0 auto;
+
+}
+
+.container {
+    min-height: 1080px;
+    background: rgba(201, 201, 201, 0.58);
+    padding: 0 10px;
+    margin: 0 auto;
+}
+
+@media (max-width: 1920px) {
+    .container {
+        max-width: 1690px;
+
+    }
+}
+
+@media (max-width: 1600px) {
+    .container {
+        max-width: 1370px;
+
+    }
+}
+
+@media (max-width: 1440px) {
+    .container {
+        max-width: none;
+    }
+}
+
+@media (max-width: 1440px) {
+    .header__teamName {
+        text-align: center;
+    }
+}
+
+.header {
+    margin: 0 auto;
+    padding: 0 95px 0 20px;
+}
+
+.header__logo:hover {
+-webkit-animation: spin 1s linear infinite;
+    -moz-animation:  spin 1s linear infinite;
+    animation:  spin 1s linear infinite;
+}
+
+@-webkit-keyframes  spin {
+    100%{-webkit-transform: rotate(360deg);}
+}
+@-moz-keyframes  spin {
+    100%{-webkit-transform: rotate(360deg);}
+}
+@keyframes spin {
+    100%{-webkit-transform: rotate(360deg);}
+}
+
+
+.header__list {
+    display: flex;
+    align-items: center;
+}
+
+.header__teamName {
+    font-family: SansSerif, Arial, sans-serif;
+    margin: 0 auto;
+    font-size: 50px;
+    font-weight: bolder;
+    text-transform: capitalize;
+    background-color: #2aa5a0;
+    background-image: linear-gradient(90deg, #ef2b39, #f6ed3f, #096193);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: black;
+    -webkit-text-stroke: 1px black;
+    -webkit-user-select: none;
+}
+
+.menu {
+    display: flex;
+}
+
+.menu__item {
+    text-align: center;
+    line-height: 40px;
+    width: 100%;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.menu__m1 {
+    background: #5261a5;
+}
+
+.menu__m2 {
+    background: #ee7e06;
+}
+
+.menu__m3 {
+    background: #ef2b39;
+}
+
+.menu__m1:hover {
+    background: #4e61c1;
+}
+
+.menu__m2:hover {
+    background: #f88102;
+}
+
+.menu__m3:hover {
+    background: #ea3c48;
+}
+
+/*начинаем писать под шапкой файловые системы */
+.selects__wrapp {
+    display: flex;
+    /*align-items: center;*/
+    justify-content: space-between;
+    margin: 30px 11px 0 11px;
+}
+
+.selects {
+    display: flex;
+}
+
+.select__file-system {
+    padding: 7px;
+    margin-right: 10px;
+    background-color: #85c7b6;
+    text-align: center;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #000;
+}
+
+.select__question-theme {
+    padding: 7px;
+    background-color: #85c7b6;
+    text-align: center;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #000;
+}
+
+.button {
+    margin-right: 2px;
+    margin-left: 10px;
+    background-color: #85c7b6;
+    padding: 11px 9px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #000;
+}
+
+.pop_up {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: transparent;
+    z-index: 2;
+    transform: translateY(-44.5%) scale(0);
+    transition: .4s ease-in-out;
+}
+
+.pop_up.active {
+    transform: translateY(0%) scale(100%);
+    background-color: rgba(0, 0, 0, .8);
+}
+
+.pop_up_container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.pop_up_body {
+    margin: auto;
+    width: 403px;
+    top: 115px;
+    background-color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    padding: 67px 15px 88px 15px;
+    position: relative;
+}
+
+.pop_up_close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 21px;
+    cursor: pointer;
+}
+
+.pop_up_question {
+    margin: -18px;
+    width: 325px;
+    height: 66px;
+    resize: none;
+    text-align: left;
+    font-size: 15px;
+}
+
+.text__area {
+    position: absolute;
+    top: 197px;
+    left: 40px;
+    font-size: 10px;
+}
+
+.selector {
+    position: relative;
+    top: 33px;
+}
+
+.radio__firstRadio {
+    color: #009910;
+}
+
+.radio__secondRadio {
+    color: #a70000;
+}
+
+.btn--cancel {
+    position: absolute;
+    left: 14px;
+    bottom: 18px;
+    padding: 5px 5px;
+    font-size: 20px;
+    line-height: 25px;
+    color: #5f1212;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btn--create {
+    position: absolute;
+    right: 14px;
+    bottom: 18px;
+    display: inline-block;
+    padding: 5px 5px;
+    font-size: 20px;
+    line-height: 25px;
+    color: black;
+    cursor: pointer;
+    transition: .2s;
+}
+
+
+.popup__area {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+

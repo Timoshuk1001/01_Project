@@ -1,0 +1,106 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-image: linear-gradient(90deg, #096193, #f6ed3f, #ef2b39);
+}
+.wrapper {
+
+    width: 1200px;
+    min-height: 1000px;
+    background: rgba(201, 201, 201, 0.58);
+    margin: 0 auto;
+    position: relative;
+}
+.header {
+    margin: 0 auto;
+    padding: 0 95px 0 20px;
+}
+.header__list {
+    display: flex;
+    align-items: center;
+}
+.header__teamName {
+    font-family: SansSerif, Arial, sans-serif;
+    margin: 0 auto;
+    font-size: 50px;
+    font-weight: bolder;
+    text-transform: capitalize;
+    background-color: #2aa5a0;
+    background-image: linear-gradient(90deg, #ef2b39, #f6ed3f, #096193);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: black;
+    -webkit-text-stroke: 1px black;
+    line-height: 10px;
+}
+.menu {
+    display: flex;
+}
+.menu__item {
+    text-align: center;
+    line-height: 40px;
+    width: 100%;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.menu__m1 {
+    background: #5261a5;
+}
+.menu__m2 {
+    background: #ee7e06;
+}
+.menu__m3 {
+    background: #ef2b39;
+}
+.menu__m1:hover {
+    background: #4e61c1;
+}
+.menu__m2:hover {
+    background: #f88102;
+}
+.menu__m3:hover {
+    background: #ea3c48;
+}
+.main {
+    color: black;
+    margin-top: 40px;
+}
+.main__head {
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+}
+.main__content {
+    margin: auto;
+    width: 800px;
+    line-height: 35px;
+    font-size: 16px;
+}
+.main__formats {
+    line-height: 0;
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 25px;
+    font-weight: bold;
+}
+.main__formats--item {
+    transition-duration: 500ms;
+}
+.main__formats--item:hover {
+    color: #5261a5;
+    text-decoration: underline;
+    cursor: default;
+}
+
+.line-through {
+    text-decoration: line-through;
+}
