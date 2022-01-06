@@ -178,13 +178,15 @@ body {
     left: 0;
     top: 0;
     background-color: transparent;
-    z-index: 2;
     transform: translateY(-44.5%) scale(0);
     transition: .4s ease-in-out;
+    z-index: -1;
+    
 }
 
 .pop_up.active {
-    transform: translateY(0%) scale(100%);
+    z-index: 2;
+    transform: translateY(0%) scale(1);
     background-color: rgba(0, 0, 0, .8);
 }
 
