@@ -100,12 +100,7 @@ app.get('/questionJson', (req, res) => {
 app.post('/questionJson', urlencodedParser, (req, res) => {
   if(!req.body) return res.sendStatus(400);
 
-  const { id, question, theme,  answer, date } = req.body; //принимает данные
-  const questionJson = JSON.parse(fs.readFileSync('./questionJson.json', 'utf8')); // читает файл
-
-  questionJson[id] = {id, question, theme,  answer, date };// обновляет данные
-
-  fs.writeFileSync('./questionJson.json', JSON.stringify(questionJson), 'utf8'); // записывает в обновленный массив
+  fs.writeFileSync('./questionJson.json', JSON.stringify(req.body), 'utf8'); // записывает в обновленный массив
   res.sendStatus(200);
 
 })

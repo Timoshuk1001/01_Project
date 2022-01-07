@@ -9,9 +9,6 @@ const fileSystem = document.querySelectorAll('input[type=checkbox]'); // выб�
 const btnCancel = document.querySelector('.btn--cancel');
 const btnCreate = document.querySelector('.btn--create'); // кнопка создания темы
 
-const getForm = document.getElementById("edit-form"); // получаем элементы попап формы
-
-
 function loadData() {
     fetch('/questionJson')
         .then((data) => {
@@ -31,14 +28,15 @@ loadData();
 
 
 function renderCards(data) {
-    const cards = data.map((dev) => {
+    const cards = data.map((quest) => {
          return `<div class="questions">
 
-                    <span class="text">${dev.question}</div>
-                    <span class="theme">${dev.theme}</span>
-                    <span class="answer">${dev.answer}</span>
-                    <span class="date">${dev.date}</span>
-                    <button onclick="deleteQuestion(${dev.id})"></button>
+                    <span class="text">${quest.question}</div>
+                    <span class="theme">${quest.theme}</span>
+                    <span class="answer">${quest.answer}</span>
+                    <span class="date">${quest.date}</span>
+                    <button onclick="deleteQuestion(${quest.id})">DELETE</button>
+                     
                     <br>
                </div>`
      }).join('');
@@ -46,16 +44,20 @@ function renderCards(data) {
 }
 
 function deleteQuestion(id) {
-    const dev = questionJsonArr[id];
+    const indexId =  questionJsonArr.findIndex((obj) => {
+        return id === obj.id;
+    })
+    questionJsonArr.splice(indexId, 1); // начиная с позиции 1, удалить 1 элемент
+    fetch('/questionJson', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(questionJsonArr),
+    }).then(() => {
+        loadData();
 
-    questionField.value = dev.question;
-    choiceOfTheme.value = dev.theme;
-    answer.value = dev.answer;
-    date.value = dev.date;
-
-    btnCreate.value = dev.id;
-
-    form.style.display = 'block';
+    });
 }
 
 btnCreate.addEventListener('click', (e) => {
@@ -68,15 +70,17 @@ btnCreate.addEventListener('click', (e) => {
         theme: choiceOfTheme.value,
         answer: findInput.value,
         date: new Date()
-
     }
+
+    questionJsonArr.push(updatedData);
+
 
     fetch('/questionJson', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(updatedData),
+        body: JSON.stringify(questionJsonArr),
     }).then(() => {
         loadData();
         questionField.value = '';
@@ -84,10 +88,10 @@ btnCreate.addEventListener('click', (e) => {
         answer.value = '';
         btnCreate.value = '';
 
-        // form.style.display = 'none';
     });
 
 })
+
 
 
 
