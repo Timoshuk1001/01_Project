@@ -1,8 +1,9 @@
-let questionJson = null;
+let questionJsonArr = null;
 
 const questionField = document.querySelector('.pop_up_question'); //поле ввода текста
 const choiceOfTheme = document.querySelector('.listSelector'); // выпадашка выбора тем
 const answer = document.querySelectorAll('input[type=radio]'); // кнопки тру фолз
+const date = document.querySelector('date');
 const fileSystem = document.querySelectorAll('input[type=checkbox]'); // выбор файловой системы
 
 const btnCancel = document.querySelector('.btn--cancel');
@@ -17,8 +18,8 @@ function loadData() {
             return data.json()
         })
         .then((data) => {
-            questionJson = data;
-
+            questionJsonArr = data;
+            console.log(data)
             renderCards(data);
         })
         .catch((e) => {
@@ -31,39 +32,45 @@ loadData();
 
 function renderCards(data) {
     const cards = data.map((dev) => {
-        return `<span class="text">${dev.text}</span> <span class="theme">${dev.theme}</span> <span class="answer">${dev.answer}</span>
-<span class="date">${dev.date}</span><button onclick="editData(${dev.id})"></button><br>`
-    }).join('');
+         return `<div class="questions">
 
-    // questionJson.innerHTML = cards;
-
+                    <span class="text">${dev.question}</div>
+                    <span class="theme">${dev.theme}</span>
+                    <span class="answer">${dev.answer}</span>
+                    <span class="date">${dev.date}</span>
+                    <button onclick="deleteQuestion(${dev.id})"></button>
+                    <br>
+               </div>`
+     }).join('');
+    list.innerHTML = cards;
 }
 
-// function editData(id) {
-//     const dev = developersArr[id];
-//
-//     questionField.value = dev.text;
-//     choiceOfTheme.value = dev.theme;
-//     answer.value = dev.answer;
-//     date.value = dev.date;
-//
-//     btnCreate.value = dev.id;
-//
-//     form.style.display = 'block';
-// }
+function deleteQuestion(id) {
+    const dev = questionJsonArr[id];
+
+    questionField.value = dev.question;
+    choiceOfTheme.value = dev.theme;
+    answer.value = dev.answer;
+    date.value = dev.date;
+
+    btnCreate.value = dev.id;
+
+    form.style.display = 'block';
+}
 
 btnCreate.addEventListener('click', (e) => {
     e.preventDefault();
     let findInput =[...answer].find((input)=> input.checked)
+
     const updatedData = {
-        id: +btnCreate.value,
+        id: +questionJsonArr.length,
         question:  questionField.value,
         theme: choiceOfTheme.value,
         answer: findInput.value,
         date: new Date()
 
     }
-    console.log(updatedData)
+
     fetch('/questionJson', {
         method: 'POST',
         headers: {
@@ -75,8 +82,6 @@ btnCreate.addEventListener('click', (e) => {
         questionField.value = '';
         choiceOfTheme.value = '';
         answer.value = '';
-
-
         btnCreate.value = '';
 
         // form.style.display = 'none';

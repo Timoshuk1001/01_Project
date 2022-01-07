@@ -40,21 +40,21 @@ app.get('/script.js', (req, res) => {
   res.send(index);
 });
 
-// добавил файл js обработчик вопросов со второй странички
-app.get('/scriptQuestionAllField.js', (req, res) => {
-  const index = fs.readFileSync('./src/scriptQuestionAllField.js', 'utf8');
-  res.send(index);
-});
-
 // при запросе каталога uploads, вручную указать откуда будет отправлен файл
 app.get('/uploads/:filename', (req, res) => {
   res.sendFile(__dirname + req.path);
 });
 
+// добавил файл js обработчик вопросов со второй странички
+app.get('/scriptQuestionAllField.js', (req, res) => {
+  const index = fs.readFileSync('./dist/scriptQuestionAllField.js', 'utf8');
+  res.send(index);
+});
+
 app.use(express.static("dist"));
 
 
-// Data
+// Data developers
 app.get('/developers', (req, res) => {
   const devsFile = JSON.parse(fs.readFileSync('./developers.json', 'utf8'));
 
@@ -72,7 +72,6 @@ app.post('/developers', upload.single('avatar'), function (req, res) {
 
   const { name, age, gender, city, activity, company, interests } = req.body;
   const id = +req.body.id;
-
   const developers = JSON.parse(fs.readFileSync('./developers.json', 'utf8'));
   const avatar = req.file ? '/uploads/' + req.file.filename : developers[id].avatar; // после сохранения записываю путь файла в переменную avatar
 
@@ -85,47 +84,26 @@ app.post('/developers', upload.single('avatar'), function (req, res) {
   res.sendStatus(200) // Отправить клиенту код 200, сообщив что запрос окончен
 });
 
-// function getFromJSONFile(URL, mode) {
-//   if (typeof URL !== "object") {
-//     return false;
-//   }
-//   /* Фунция чтения из файла JSON и фильтрации его,
-//     если нужно по темам, которые приходят в query параметрах */
-//   var bufferFromJsonFile = fs.readFileSync(questions/questions.json);
-//   var arrayFromJson = [];
-//   var parsedBuffer = JSON.parse(bufferFromJsonFile);
-//   if (URL.get("theme") === "ALLTHEMES" || mode === 1) {
-//     return parsedBuffer;
-//   } else {
-//     for (var i = 0; i < parsedBuffer.length; i++) {
-//       if (parsedBuffer[i].theme === URL.get("theme")) {
-//         arrayFromJson.push(parsedBuffer[i]);
-//       }
-//     }
-//   }
-//   return arrayFromJson;
-// }
 
+//Data questionJson
 app.get('/questionJson', (req, res) => {
-  let questionJson = [];
-  const devsFile = JSON.parse(fs.readFileSync('./questionJson.json', 'utf8'));
-  questionJson.push(devsFile);
+  //let questionJson = [];
+  const questsFile = JSON.parse(fs.readFileSync('./questionJson.json', 'utf8'));
+  //squestionJson.push(devsFile);
   res.set({
     "Content-Type": "application/json",
   });
 
-  res.json(devsFile)
+  res.json(questsFile)
 })
 
 app.post('/questionJson', urlencodedParser, (req, res) => {
   if(!req.body) return res.sendStatus(400);
 
-
   const { id, question, theme,  answer, date } = req.body; //принимает данные
-  const id2 = +req.body.id;
   const questionJson = JSON.parse(fs.readFileSync('./questionJson.json', 'utf8')); // читает файл
 
-  questionJson.push ({ id, question, theme,  answer, date });// обновляет данные
+  questionJson[id] = {id, question, theme,  answer, date };// обновляет данные
 
   fs.writeFileSync('./questionJson.json', JSON.stringify(questionJson), 'utf8'); // записывает в обновленный массив
   res.sendStatus(200);
