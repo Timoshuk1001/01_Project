@@ -42,9 +42,10 @@ function renderCards(data) {
                 <div class="describe">
                     <div class="name">${dev.name}</div><div class="age">${dev.age}</div><div class="gender">${dev.gender}</div>
                     <div class="city">${dev.city}</div><div class="activity">${dev.activity}</div><div class="company">${dev.company}</div>
-                    <div class="interests">${dev.interests}</div><button class="edit-btn" onclick="editData(${dev.id})"><img src="image/pngegg.png" width="30px" alt=""></button>
+                    <div class="interests">${dev.interests}</div>
+                    <button class="edit-btn" onclick="editData(${dev.id})"><img src="image/pngegg.png" width="30px" alt=""></button>
                 </div>
-                
+                <br>
             </div>`
   }).join('');
 
