@@ -150,6 +150,16 @@ body {
     border-radius: 10px;
     text-decoration: none;
     color: #000;
+    transition: background-color 1s linear;
+}
+
+
+.select__file-system:active {
+    transform: translate(3px, -50%) rotate(45deg);
+}
+
+.select__file-system:hover {
+    background-color: #2983FA;
 }
 
 .select__question-theme {
@@ -158,7 +168,29 @@ body {
     text-align: center;
     border-radius: 10px;
     text-decoration: none;
-    color: #000;
+    color: #000000;
+    transition: background-color 1s linear;
+}
+
+.select__question-theme:hover {
+    background-color: #2983FA;
+}
+
+@keyframes bounce {
+    0%, 20%, 60%, 100% {
+        transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-20px);
+        transform: translateY(-20px);
+    }
+
+    80% {
+        transform: translateY(-10px);
+        transform: translateY(-10px);
+    }
 }
 
 .button {
@@ -168,7 +200,13 @@ body {
     padding: 11px 9px;
     border-radius: 10px;
     text-decoration: none;
-    color: #000;
+    color: #000000;
+    transition: background-color 1s linear;
+}
+
+.button:hover {
+    background-color: #2983FA;
+    animation: bounce 1s;
 }
 
 .pop_up {
@@ -189,7 +227,6 @@ body {
     transform: translateY(0%) scale(1);
     background-color: rgba(0, 0, 0, .8);
 }
-
 .pop_up_container {
     display: flex;
     width: 100%;
