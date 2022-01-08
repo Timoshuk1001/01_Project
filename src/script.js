@@ -85,3 +85,12 @@ submitAndCloseBtn.addEventListener('click',() =>{
   formWrap.classList.remove('active');
 });
 
+// крестик для закрытия мадалки ! = попапа
+const closePopUp = document.querySelector('.pop_up_close');
+const popUp = document.querySelector('.edit-dev-wrap');
+function openAndClose(){
+  closePopUp.addEventListener('click', () => {
+    popUp.classList.remove('active');
+  })
+}
+openAndClose();

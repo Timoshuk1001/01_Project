@@ -7,16 +7,64 @@ body {
     background-image: linear-gradient(90deg, #096193, #f6ed3f, #ef2b39);
 }
 .wrapper {
-
-    width: 1200px;
-    background: rgba(201, 201, 201, 0.58);
+    max-width: 1200px;
+    overflow: hidden;
     margin: 0 auto;
-    position: relative;
+}
+
+.container {
+    min-height: 1080px;
+    background: rgba(201, 201, 201, 0.58);
+    padding: 0 10px;
+    margin: 0 auto;
+}
+
+@media (max-width: 1920px) {
+    .container {
+        max-width: 1690px;
+
+    }
+}
+
+@media (max-width: 1600px) {
+    .container {
+        max-width: 1370px;
+
+    }
+}
+
+@media (max-width: 1440px) {
+    .container {
+        max-width: none;
+    }
+}
+
+@media (max-width: 1440px) {
+    .header__teamName {
+        text-align: center;
+    }
 }
 .header {
     margin: 0 auto;
     padding: 0 95px 0 20px;
 }
+
+.header__logo:hover {
+    -webkit-animation: spin 1s linear infinite;
+    -moz-animation:  spin 1s linear infinite;
+    animation:  spin 1s linear infinite;
+}
+
+@-webkit-keyframes  spin {
+    100%{-webkit-transform: rotate(360deg);}
+}
+@-moz-keyframes  spin {
+    100%{-webkit-transform: rotate(360deg);}
+}
+@keyframes spin {
+    100%{-webkit-transform: rotate(360deg);}
+}
+
 .header__list {
     display: flex;
     align-items: center;
@@ -34,7 +82,7 @@ body {
     -webkit-text-fill-color: transparent;
     color: black;
     -webkit-text-stroke: 1px black;
-    line-height: 10px;
+    -webkit-user-select: none;
 }
 .menu {
     display: flex;
@@ -93,6 +141,7 @@ body {
 .avatar {
     border: solid black 1px;
     border-radius: 50%;
+    -webkit-user-select: none;
 }
 
 .name{
@@ -129,61 +178,164 @@ body {
         box-shadow: 0 0 8px 2px rgba(255, 48, 26, 0), 0 0 4px 20px rgba(255, 48, 26, 0);
     }
 }
+
+.edit-dev {
+
+}
+
 .edit-dev-wrap{
-    display: none;
     width: 100%;
     height: 100%;
     position: fixed;
     left: 0;
     top: 0;
-    background: rgba(189, 189, 189, 0.8);
-    z-index: 2;
-}
+    background-color: transparent;
+    transform: translateY(-44.5%) scale(0);
+    z-index: -1;
+    transition: all 0.6s ease 0s;
+ }
 
 .edit-dev-wrap.active{
-    display: block;
+    //display: block;
+    z-index: 2;
+    transform: translateY(0%) scale(1);
+    background-color: rgba(0, 0, 0, .8);
 }
 
 .edit-dev-form{
-
+    margin: auto;
+    width: 430px;
+    height: 1000px;
+    top: 25px;
+    background-color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    padding: 25px 15px;
+    position: relative;
 }
 
-.edit-dev {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    top: 50%;
-    transform: translate(0, -50%);
-    width: 800px;
-    z-index: 3;
-    background: white;
 
-}
 
 .edit-dev input {
-    display: inline-block;
-    margin: 20px 0 10px 300px;
-    height: 40px;
+    //display: inline-block;
+    height: 50px;
+    padding: 0px 20px;
+   border-radius: 5px;
+    width: 100%;
     font-size: 18px;
-    outline: none;
-    border: solid 1px black;
-    width: 200px;
-
-}
-
-#edit-avatar{
-    width: 200px;
-    height: 100px;
 }
 
 
+.form__title {
+margin: 0px 0px 30px 0px;
+}
+
+.form__item {
+    margin: 0px 0px 20px 0px;
+}
+
+.form__label {
+    font-size: 18px;
+    display: block;
+    margin: 0px 0px 10px 0px;
+    text-align: left;
+}
+
+.form__label--file{
+    font-size: 18px;
+    display: block;
+    margin: 0px 0px 10px 0px;
+    text-align: center;
+}
+
+.edit-name {
+}
+
+.edit-age {
+}
+
+.edit-gender {
+}
+
+.edit-city {
+}
+
+.edit-activity {
+}
+
+.edit-company {
+}
+
+.edit-interests {
+}
+
+.file {
+}
+
+.file__item {
+position: relative;
+}
+
+.file__input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    font-size: 0;
+    cursor: pointer;
+}
+
+.file__button {
+    display: inline-flex;
+    min-height: 40px;
+    border-radius: 30px;
+    justify-content: center;
+    align-items: center;
+    background-color: #77608d;
+    padding: 0 15px;
+    color: white;
+}
 
 
+.submit-and-close {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background-color: #7a956b;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.submit-and-close:hover {
+    background-color: #586847;
+    box-shadow: 0 1px 4px 3px grey;
+}
+
+
+.pop_up_close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 21px;
+    cursor: pointer;
+}
+
+.popup__area {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
 
 
 
