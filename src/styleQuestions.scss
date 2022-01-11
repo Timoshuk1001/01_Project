@@ -174,23 +174,6 @@ body {
     background-color: #2983FA;
 }
 
-@keyframes bounce {
-    0%, 20%, 60%, 100% {
-        transform: translateY(0);
-        transform: translateY(0);
-    }
-
-    40% {
-        transform: translateY(-20px);
-        transform: translateY(-20px);
-    }
-
-    80% {
-        transform: translateY(-10px);
-        transform: translateY(-10px);
-    }
-}
-
 .button {
     margin-right: 2px;
     margin-left: 10px;
@@ -204,7 +187,7 @@ body {
 
 .button:hover {
     background-color: #2983FA;
-    animation: bounce 1s;
+    transform: scale(1.1);
 }
 
 .pop_up {
