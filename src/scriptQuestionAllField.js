@@ -69,7 +69,7 @@ btnCreate.addEventListener('click', (e) => {
         question:  questionField.value,
         theme: choiceOfTheme.value,
         answer: findInput.value,
-        date: new Date()
+        date: new Date() +200
     }
 
     questionJsonArr.push(updatedData);
