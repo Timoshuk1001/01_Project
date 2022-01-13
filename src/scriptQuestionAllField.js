@@ -1,5 +1,10 @@
-let questionJsonArr = null;
 
+const questionData = {
+    'JSON': [],
+    'CSV': [],
+    'XML': [],
+    'YAML': []
+}
 const questionField = document.querySelector('.pop_up_question'); //поле ввода текста
 const choiceOfTheme = document.querySelector('.listSelector'); // выпадашка выбора тем
 const answer = document.querySelectorAll('input[type=radio]'); // кнопки тру фолз
@@ -8,26 +13,61 @@ const fileSystem = document.querySelectorAll('input[type=checkbox]'); // выб�
 
 const btnCancel = document.querySelector('.btn--cancel');
 const btnCreate = document.querySelector('.btn--create'); // кнопка создания темы
+const selectFS = document.getElementById('selectorFile');
 
-function loadData() {
-    fetch('/questionJson')
+selectFS.addEventListener('change', (el) => {
+    const value = el.target.value;
+    //console.log(value)
+    loadData(value);
+})
+
+function loadData(fileSistem) {
+
+    fetch(`/question${fileSistem}`)
         .then((data) => {
             return data.json()
         })
+
         .then((data) => {
-            questionJsonArr = data;
             console.log(data)
-            renderCards(data);
+            questionData[fileSistem] = data;
+           // console.log(data)
+            renderCards(data, fileSistem);
         })
         .catch((e) => {
             console.log(e);
         })
 }
 
-loadData();
+loadData('JSON');
 
 
-function renderCards(data) {
+/* (если число меньше десяти, перед числом добавляем ноль) */
+function zero_first_format(value)
+{
+    if (value < 10)
+    {
+        value='0'+value;
+    }
+    return value;
+}
+
+/* функция получения текущей даты и времени */
+function date_time()
+{
+    let current_datetime = new Date();
+    let day = zero_first_format(current_datetime.getDate());
+    let month = zero_first_format(current_datetime.getMonth()+1);
+    let year = current_datetime.getFullYear();
+    let hours = zero_first_format(current_datetime.getHours());
+    let minutes = zero_first_format(current_datetime.getMinutes());
+    let seconds = zero_first_format(current_datetime.getSeconds());
+
+    return day+"."+month+"."+year+" "+hours+":"+minutes+":"+seconds;
+}
+
+
+function renderCards(data, fileSistem) {
     const cards = data.map((quest) => {
          return `<div class="questions">
 
@@ -35,7 +75,7 @@ function renderCards(data) {
                     <span class="theme">${quest.theme}</span>
                     <span class="answer">${quest.answer}</span>
                     <span class="date">${quest.date}</span>
-                    <button onclick="deleteQuestion(${quest.id})">DELETE</button>
+                    <button onclick="deleteQuestion(${quest.id}, '${fileSistem}')">DELETE</button>
                      
                     <br>
                </div>`
@@ -43,19 +83,22 @@ function renderCards(data) {
     list.innerHTML = cards;
 }
 
-function deleteQuestion(id) {
-    const indexId =  questionJsonArr.findIndex((obj) => {
+function deleteQuestion(id, fileSistem) {
+    const indexId = questionData[fileSistem].findIndex((obj) => {
         return id === obj.id;
+
     })
-    questionJsonArr.splice(indexId, 1); // начиная с позиции 1, удалить 1 элемент
-    fetch('/questionJson', {
+    questionData[fileSistem].splice(indexId, 1); // начиная с позиции 1, удалить 1 элемент
+    console.log(questionData, fileSistem, indexId)
+
+    fetch(`/question${fileSistem}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(questionJsonArr),
+        body: JSON.stringify(questionData[fileSistem]),
     }).then(() => {
-        loadData();
+        loadData(fileSistem);
 
     });
 }
@@ -63,32 +106,42 @@ function deleteQuestion(id) {
 btnCreate.addEventListener('click', (e) => {
     e.preventDefault();
     let findInput =[...answer].find((input)=> input.checked)
+let addFSArr = []
+    let findFS = [...fileSystem].find((input) => {
+        if (input.checked) {
+         let addSistem = input.value;
+            addFSArr.push(addSistem)
+        }
 
-    const updatedData = {
-        id: +questionJsonArr.length,
+    })
+    console.log(addFSArr)
+    for (let i of addFSArr) {
+        const updatedData = {
+        id: +questionData[i].length,
         question:  questionField.value,
         theme: choiceOfTheme.value,
         answer: findInput.value,
-        date: new Date() +200
+        date: date_time()
     }
 
-    questionJsonArr.push(updatedData);
+    questionData[i].push(updatedData);
 
 
-    fetch('/questionJson', {
+    fetch(`/question${i}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(questionJsonArr),
+        body: JSON.stringify(questionData[i]),
     }).then(() => {
-        loadData();
+        loadData(i);
         questionField.value = '';
         choiceOfTheme.value = '';
         answer.value = '';
         btnCreate.value = '';
 
     });
+}
 
 })
 
