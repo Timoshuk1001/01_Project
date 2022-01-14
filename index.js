@@ -188,7 +188,7 @@ function convertToXML(array) {
     return '';
   }
 
-   let result = "<questions>";
+   let result = "<questions>\n";
 
     for (let i = 0; i < array.length; i++) {
       let wrapper = "<body>";
@@ -199,22 +199,22 @@ function convertToXML(array) {
         wrapper += "<"+`${key}`+">"+`${array[i][key]}`+"</"+`${key}`+">";
       }
 
-      result += wrapper + "</body>";
+      result = result + wrapper + "</body>\n" ;
     }
-    result += "</questions>";
-   
+    result = result + "</questions>";
+    return result
 }
 
 
 function parseXml(xml) {
-  const json = {}
   let arr = [];
-  arr.push(json);
-
-  for (const res of xml.matchAll(/(?:<(\w*)(?:\s[^>]*)*>)((?:(?!<).)*)(?:<\/\1>)|<(\w*)(?:\s*)*\/>/gm)) {
-    const key = res[1];
-    json[key] = res[2];
-
+  for (let body of xml.matchAll(/<body>(.+)<\/body>/g)) {
+    let json = {}
+    for (const res of body[1].matchAll(/(?:<(\w*)(?:\s[^>]*)*>)((?:(?!<).)*)(?:<\/\1>)|<(\w*)(?:\s*)*\/>/gm)) {
+      const key = res[1];
+      json[key] = res[2];
+    }
+    arr.push(json);
   }
   return arr
 }
@@ -227,6 +227,10 @@ app.post('/questionXML', urlencodedParser, (req, res) => {
   res.sendStatus(200);
 
 })
+
+
+
+
 
 
 ///
