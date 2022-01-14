@@ -160,13 +160,76 @@ function csv2arrParser(string) {
 }
 
 app.post('/questionCSV', urlencodedParser, (req, res) => {
-  console.log(req.body)
+  //console.log(req.body)
   if(!req.body) return res.sendStatus(400);
   fs.writeFileSync('./questionCSV.csv', arr2csvParser(req.body), 'utf-8'); // записывает в обновленный массив
   res.sendStatus(200);
 
 })
 
+
+//XML
+
+app.get('/questionXML', (req, res) => {
+  const str = fs.readFileSync('./questionXML.xml', 'utf8');
+  const arr = parseXml(str);
+  //res.send(str);
+
+  res.set({
+    "Content-Type": "application/json",
+  });
+
+  res.json(arr)
+
+});
+
+function convertToXML(array) {
+  if(!array || !Array.isArray(array)){
+    return '';
+  }
+
+   let result = "<questions>";
+
+    for (let i = 0; i < array.length; i++) {
+      let wrapper = "<body>";
+      if (array[i] === null || array[i] === undefined) {
+        break;
+      }
+      for (let key in array[i]) {
+        wrapper += "<"+`${key}`+">"+`${array[i][key]}`+"</"+`${key}`+">";
+      }
+
+      result += wrapper + "</body>";
+    }
+    result += "</questions>";
+   
+}
+
+
+function parseXml(xml) {
+  const json = {}
+  let arr = [];
+  arr.push(json);
+
+  for (const res of xml.matchAll(/(?:<(\w*)(?:\s[^>]*)*>)((?:(?!<).)*)(?:<\/\1>)|<(\w*)(?:\s*)*\/>/gm)) {
+    const key = res[1];
+    json[key] = res[2];
+
+  }
+  return arr
+}
+
+
+app.post('/questionXML', urlencodedParser, (req, res) => {
+  console.log(req.body)
+  if(!req.body) return res.sendStatus(400);
+  fs.writeFileSync('./questionXML.xml', convertToXML(req.body), 'utf-8'); // записывает в обновленный массив
+  res.sendStatus(200);
+
+})
+
+
+///
 app.listen(3000, () => {
   console.log(`Example app listening at http://localhost:3000`)
 });
