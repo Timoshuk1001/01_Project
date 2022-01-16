@@ -31,6 +31,7 @@ selectTheme.addEventListener('change', (e) => {
 
 function loadData(fileSystem) {
 
+
     fetch(`/question${fileSystem}`)
         .then((data) => data.json())
         .then((data) => {
@@ -43,13 +44,16 @@ function loadData(fileSystem) {
             const filteredByThemeData = data.filter(({theme}) => theme === selectTheme.value);
             renderCards(filteredByThemeData, fileSystem);
 
+
         })
         .catch((e) => {
             console.error(e);
         })
 }
 
+
 // loadData('JSON')
+
 
 /* (если число меньше десяти, перед числом добавляем ноль) */
 function zero_first_format(value)
@@ -101,8 +105,10 @@ function deleteQuestion(id, fileSystem) {
         return id === obj.id;
 
     })
+
     questionData[fileSystem].splice(indexId, 1); // начиная с позиции 1, удалить 1 элемент
     //console.log(questionData, fileSystem, indexId)
+
 
     fetch(`/question${fileSystem}`, {
         method: 'POST',
