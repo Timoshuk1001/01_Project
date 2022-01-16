@@ -111,7 +111,7 @@ app.post('/questionJSON', urlencodedParser, (req, res) => {
 app.get('/questionYAML', (req, res) => {
   const str = fs.readFileSync('./questionYAML.yaml', 'utf8');
   const arr = yamlParser.load(str);
-  console.log(arr)
+
 
   res.set({
     "Content-Type": "application/json",
@@ -197,8 +197,11 @@ app.post('/questionCSV', urlencodedParser, (req, res) => {
 
 app.get('/questionXML', (req, res) => {
   const str = fs.readFileSync('./questionXML.xml', 'utf8');
-  const arr = parseXml(str);
-  //res.send(str);
+  let arr = parseXml(str);
+  arr = arr.map((el) => {
+      el.id = +el.id
+      return el
+    })
 
   res.set({
     "Content-Type": "application/json",

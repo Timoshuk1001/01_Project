@@ -83,13 +83,15 @@ function date_time()
 function renderCards(data, fileSystem) {
     console.log(fileSystem)
     const cards = data.map((quest) => {
-         return `<div class="questions">
+        return `<div class="questions">
 
                     <div class="text">${quest.question}</div>
                     <div class="theme">${quest.theme}</div>
                     <div class="answer">${quest.answer}</div>
-                    <div class="date">${quest.date}</div>
-                    <button onclick="openModal(${quest.id}, '${fileSystem}')">DELETE</button>
+                    <div class="flex">
+                        <div class="date">${quest.date}</div>
+                        <button class="btnDel" onclick="deleteQuestion(${quest.id}, '${fileSystem}')">DELETE</button>
+                    </div>
                     <br>
                </div>`
      }).join('');

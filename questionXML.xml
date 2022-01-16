@@ -1,3 +1,5 @@
-<questions>
-<body><id>0</id><question>чрмтмьи ьиь</question><theme>Unit Test</theme><answer>True</answer><date>16.01.2022 22:26:40</date></body>
+
+<body><id>0</id><question>Это важно для оптимизации сайта и доступности.</question><theme>Meta-Tags</theme><answer>True</answer><date>17.01.2022 00:24:40</date></body>
+<body><id>1</id><question>Считалось багом</question><theme>Margin Collapsing</theme><answer>True</answer><date>17.01.2022 00:26:44</date></body>
+
 </questions>
