@@ -10,9 +10,8 @@ const ignoreTheme = 'theme 0';
 const questionField = document.querySelector('.pop_up_question'); //поле ввода текста
 const choiceOfTheme = document.querySelector('.listSelector'); // выпадашка выбора тем
 const answer = document.querySelectorAll('input[type=radio]'); // кнопки тру фолз
-const date = document.querySelector('date');
-const fileSystem = document.querySelectorAll('input[type=checkbox]'); // выбор файловой системы
-
+//const date = document.querySelector('date');
+const fileSystemArr = document.querySelectorAll('input[type=checkbox]'); // выбор файловой системы
 const btnCancel = document.querySelector('.btn--cancel');
 const btnCreate = document.querySelector('.btn--create'); // кнопка создания темы
 const selectFS = document.getElementById('selectorFile');
@@ -30,24 +29,30 @@ selectTheme.addEventListener('change', (e) => {
     loadData(selectFS.value);
 })
 
-function loadData(fileSistem) {
+function loadData(fileSystem) {
 
-    fetch(`/question${fileSistem}`)
+
+    fetch(`/question${fileSystem}`)
         .then((data) => data.json())
         .then((data) => {
-            questionData[fileSistem] = data;
+            questionData[fileSystem] = data;
 
             if(selectTheme.value === ignoreTheme) {
-                return renderCards(data, fileSistem);
+                return renderCards(data, fileSystem);
             }
 
             const filteredByThemeData = data.filter(({theme}) => theme === selectTheme.value);
-            renderCards(filteredByThemeData, fileSistem);
+            renderCards(filteredByThemeData, fileSystem);
+
+
         })
         .catch((e) => {
             console.error(e);
         })
 }
+
+
+// loadData('JSON')
 
 
 /* (если число меньше десяти, перед числом добавляем ноль) */
@@ -75,7 +80,7 @@ function date_time()
 }
 
 
-function renderCards(data, fileSistem) {
+function renderCards(data, fileSystem) {
     const cards = data.map((quest) => {
          return `<div class="questions">
 
@@ -83,30 +88,36 @@ function renderCards(data, fileSistem) {
                     <span class="theme">${quest.theme}</span>
                     <span class="answer">${quest.answer}</span>
                     <span class="date">${quest.date}</span>
-                    <button onclick="deleteQuestion(${quest.id}, '${fileSistem}')">DELETE</button>
+                    <button onclick="deleteQuestion(${quest.id}, '${fileSystem}')">DELETE</button>
                      
                     <br>
                </div>`
      }).join('');
-    list.innerHTML = cards;
+    if (cards !== '') {
+        list.innerHTML = cards;
+    } else {
+        list.innerHTML = '<h4 id="ifNoQuestion">There are no questions</h4>'
+    }
 }
 
-function deleteQuestion(id, fileSistem) {
-    const indexId = questionData[fileSistem].findIndex((obj) => {
+function deleteQuestion(id, fileSystem) {
+    const indexId = questionData[fileSystem].findIndex((obj) => {
         return id === obj.id;
 
     })
-    questionData[fileSistem].splice(indexId, 1); // начиная с позиции 1, удалить 1 элемент
-    //console.log(questionData, fileSistem, indexId)
 
-    fetch(`/question${fileSistem}`, {
+    questionData[fileSystem].splice(indexId, 1); // начиная с позиции 1, удалить 1 элемент
+    //console.log(questionData, fileSystem, indexId)
+
+
+    fetch(`/question${fileSystem}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(questionData[fileSistem]),
+        body: JSON.stringify(questionData[fileSystem]),
     }).then(() => {
-        loadData(fileSistem);
+        loadData(fileSystem);
 
     });
 }
@@ -115,10 +126,10 @@ btnCreate.addEventListener('click', (e) => {
     e.preventDefault();
     let findInput =[...answer].find((input)=> input.checked)
 let addFSArr = []
-    let findFS = [...fileSystem].find((input) => {
+    let findFS = [...fileSystemArr].find((input) => {
         if (input.checked) {
-         let addSistem = input.value;
-            addFSArr.push(addSistem)
+         let addSystem = input.value;
+            addFSArr.push(addSystem)
         }
 
     })
