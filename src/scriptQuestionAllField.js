@@ -31,17 +31,17 @@ selectTheme.addEventListener('change', (e) => {
 
 function loadData(fileSystem) {
 
-    fetch(`/question${fileSistem}`)
+    fetch(`/question${fileSystem}`)
         .then((data) => data.json())
         .then((data) => {
-            questionData[fileSistem] = data;
+            questionData[fileSystem] = data;
 
             if(selectTheme.value === ignoreTheme) {
-                return renderCards(data, fileSistem);
+                return renderCards(data, fileSystem);
             }
 
             const filteredByThemeData = data.filter(({theme}) => theme === selectTheme.value);
-            renderCards(filteredByThemeData, fileSistem);
+            renderCards(filteredByThemeData, fileSystem);
 
         })
         .catch((e) => {
@@ -49,7 +49,7 @@ function loadData(fileSystem) {
         })
 }
 
-
+// loadData('JSON')
 
 /* (если число меньше десяти, перед числом добавляем ноль) */
 function zero_first_format(value)
@@ -89,7 +89,11 @@ function renderCards(data, fileSystem) {
                     <br>
                </div>`
      }).join('');
-    list.innerHTML = cards;
+    if (cards !== '') {
+        list.innerHTML = cards;
+    } else {
+        list.innerHTML = '<h4 id="ifNoQuestion">There are no questions</h4>'
+    }
 }
 
 function deleteQuestion(id, fileSystem) {
@@ -118,8 +122,8 @@ btnCreate.addEventListener('click', (e) => {
 let addFSArr = []
     let findFS = [...fileSystemArr].find((input) => {
         if (input.checked) {
-         let addSistem = input.value;
-            addFSArr.push(addSistem)
+         let addSystem = input.value;
+            addFSArr.push(addSystem)
         }
 
     })

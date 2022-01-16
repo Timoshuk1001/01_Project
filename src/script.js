@@ -66,6 +66,7 @@ function editData(id) {
   idInput.value = dev.id;
   formWrap.classList.add('active')
   form.style.display = 'block';
+  document.body.classList.add('hidden')
 }
 
 form.addEventListener('submit', (e) => {
@@ -83,6 +84,7 @@ form.addEventListener('submit', (e) => {
 
 submitAndCloseBtn.addEventListener('click',() =>{
   formWrap.classList.remove('active');
+  document.body.classList.remove('hidden')
 });
 
 // крестик для закрытия мадалки ! = попапа
@@ -91,6 +93,7 @@ const popUp = document.querySelector('.edit-dev-wrap');
 function openAndClose(){
   closePopUp.addEventListener('click', () => {
     popUp.classList.remove('active');
+    document.body.classList.remove('hidden')
   })
 }
 openAndClose();

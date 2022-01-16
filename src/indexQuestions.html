@@ -56,9 +56,9 @@
 
         <div class="empty__field"></div>
 
-
-    <div class="list" id="list">
         <h3>List of questions</h3>
+    <div class="list" id="list">
+
         <h4 id="ifNoQuestion">There are no questions</h4>
     </div>
 
@@ -119,36 +119,36 @@
         </div>
     </form>
 </div>
-<script>
-    function setLocalStorage(key, value) {
-        localStorage.setItem(key, value)
-    }
+<!--<script>-->
+<!--    function setLocalStorage(key, value) {-->
+<!--        localStorage.setItem(key, value)-->
+<!--    }-->
 
-    function getLocalStorage(key) {
-        return  localStorage.getItem(key)
-    }
+<!--    function getLocalStorage(key) {-->
+<!--        return  localStorage.getItem(key)-->
+<!--    }-->
 
-    function onChangeSelect(event) {
-        const lastSelected = event.target.options[event.target.selectedIndex].value;
-        setLocalStorage(event.target.name, lastSelected);
-    }
-    const selectFileSystem = document.getElementById("selectorFile");
-    let lastFileSystem = getLocalStorage('selectFileSystem');
+<!--    function onChangeSelect(event) {-->
+<!--        const lastSelected = event.target.options[event.target.selectedIndex].value;-->
+<!--        setLocalStorage(event.target.name, lastSelected);-->
+<!--    }-->
+<!--    const selectFileSystem = document.getElementById("selectorFile");-->
+<!--    let lastFileSystem = getLocalStorage('selectFileSystem');-->
 
-    if (lastFileSystem) {
-        selectFileSystem.value = lastFileSystem;
-    }
-    selectFileSystem.onchange = onChangeSelect;
+<!--    if (lastFileSystem) {-->
+<!--        selectFileSystem.value = lastFileSystem;-->
+<!--    }-->
+<!--    selectFileSystem.onchange = onChangeSelect;-->
 
-    const selectTheme = document.getElementById("selectorQuestion");
-    const lastTheme = getLocalStorage('selectTheme');
+<!--    const selectTheme = document.getElementById("selectorQuestion");-->
+<!--    const lastTheme = getLocalStorage('selectTheme');-->
 
-    if (lastTheme) {
-        selectTheme.value = lastTheme;
-    }
+<!--    if (lastTheme) {-->
+<!--        selectTheme.value = lastTheme;-->
+<!--    }-->
 
-    selectTheme.onchange = onChangeSelect;
-</script>
+<!--    selectTheme.onchange = onChangeSelect;-->
+<!--</script>-->
 <script src="scriptQuestionAllField.js"></script>
 <script src="scriptQuestions.js"></script>
 <script src="scriptQuestionCreateAndClose.js"></script>
