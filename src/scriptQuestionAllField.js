@@ -90,7 +90,7 @@ function renderCards(data, fileSystem) {
                     <div class="answer">${quest.answer}</div>
                     <div class="flex">
                         <div class="date">${quest.date}</div>
-                        <button class="btnDel" onclick="deleteQuestion(${quest.id}, '${fileSystem}')">DELETE</button>
+                        <button class="btnDel" onclick="openModal(${quest.id}, '${fileSystem}')">DELETE</button>
                     </div>
                     <br>
                </div>`
