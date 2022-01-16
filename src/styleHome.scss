@@ -4,7 +4,7 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-image: linear-gradient(90deg, #096193, #f6ed3f, #ef2b39);
+    background-image: linear-gradient(90deg, #397ea6, #e0d954, #f68065);
 }
 .wrapper {
     max-width: 1200px;
@@ -13,9 +13,9 @@ body {
 }
 
 .container {
-    min-height: 1080px;
+    min-height: calc(100vh - 16px);
     background: rgba(201, 201, 201, 0.58);
-    padding: 0 10px;
+    padding: 10px;
     margin: 0 auto;
 }
 
@@ -122,52 +122,103 @@ body {
     font-size: 40px;
     font-weight: 700;
     text-align: center;
-
+    color: #2b2b2b;
 }
-
-.card{
+.developers {
     display: flex;
-    margin: 50px;
-    position: relative;
-
-}
-.describe{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-left: 50px;
-}
-
-.avatar {
-    border: solid black 1px;
-    border-radius: 50%;
-    -webkit-user-select: none;
-}
-
-.name{
-    font-weight: 700;
-    font-size: 35px;
-}
-
-.edit-btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    right: 50px;
-    top: 10px;
-    border: none;
-    border-radius: 50%;
-    outline: none;
-    width: 30px;
-    background: none;
-    cursor: pointer;
-}
-
-.edit-btn:hover {
-    transition: all 0.2s;
-    animation: shadow 0.6s infinite linear;
-    background-color: #f58470;
-    color: #ffffff;
+    flex-wrap: wrap;
+    .card {
+        display: flex;
+        flex-direction: column;
+        flex: 1 0 calc(50% - 14px);
+        margin: 7px;
+        min-width: 450px;
+        background: #ffffff3d;
+        border: 1px solid #fff;
+        padding: 10px;
+        border-radius: 5px;
+        &:hover {
+            .edit-btn {
+                opacity: 1;
+            }
+        }
+    }
+    .user-card-header {
+        position: relative;
+        padding: 0 20px;
+        margin-bottom: 10px;
+    }
+    .user-card-content {
+        display: flex;
+        align-items: flex-start;
+    }
+    .describe {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        margin-left: 15px;
+        border: 1px solid #9c9c9c;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+    .photo {
+        flex: 0 0 150px;
+    }
+    .avatar {
+        box-shadow: 1px 1px 4px 1px #807c7c;
+        border-radius: 10px;
+    }
+    .name {
+        font-weight: 700;
+        font-size: 26px;
+        margin-top: -5px;
+        text-align: center;
+        color: #2b2b2b;
+        letter-spacing: 2px;
+    }
+    .param-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        background: rgba(96,96,96,0.1);
+        padding: 2px 7px;
+        &:nth-of-type(odd) {
+            background: rgba(254,254,255,0.4);
+        }
+    }
+    .param-name {
+        font-weight: bold;
+        flex: 0 0 101px;
+    }
+    .param-value {
+        flex: 1 1 auto;
+    }
+    .edit-btn {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        right: 0;
+        top: 0;
+        border: none;
+        border-radius: 50%;
+        outline: none;
+        width: 20px;
+        height: 20px;
+        padding: 0;
+        background: url("image/pngegg.png") center no-repeat;
+        background-size: contain;
+        opacity: 0;
+        cursor: pointer;
+        transition: opacity 150ms linear;
+        &:hover {
+            transition: all 0.2s;
+            animation: shadow 0.6s infinite linear;
+            animation-direction: alternate-reverse;
+            background-color: #f58470;
+            color: #ffffff;
+        }
+    }
 }
 
 @keyframes shadow {
@@ -342,7 +393,27 @@ body.hidden {
     overflow: hidden;
 }
 
-
+@media (max-width: 600px) {
+    .developers {
+        .card {
+            flex: 1 1 auto;
+            width: 100%;
+            min-width: 0;
+            margin: 5px 0;
+        }
+        .user-card-content {
+            flex-direction: column;
+            align-items: center;
+        }
+        .name {
+            font-size: 22px;
+        }
+        .describe {
+            margin: 10px 0 0 0;
+            width: 100%;
+        }
+    }
+}
 
 
 
