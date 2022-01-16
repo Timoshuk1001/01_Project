@@ -5,6 +5,8 @@ const questionData = {
     'XML': [],
     'YAML': []
 }
+const ignoreTheme = 'theme 0';
+
 const questionField = document.querySelector('.pop_up_question'); //поле ввода текста
 const choiceOfTheme = document.querySelector('.listSelector'); // выпадашка выбора тем
 const answer = document.querySelectorAll('input[type=radio]'); // кнопки тру фолз
@@ -14,32 +16,38 @@ const fileSystem = document.querySelectorAll('input[type=checkbox]'); // выб�
 const btnCancel = document.querySelector('.btn--cancel');
 const btnCreate = document.querySelector('.btn--create'); // кнопка создания темы
 const selectFS = document.getElementById('selectorFile');
+const selectTheme = document.getElementById('selectorQuestion');
 
 selectFS.addEventListener('change', (el) => {
     const value = el.target.value;
-    //console.log(value)
+
+    localStorage.setItem('fileSystem', value);
     loadData(value);
+});
+
+selectTheme.addEventListener('change', (e) => {
+    localStorage.setItem('selectTheme', e.target.value);
+    loadData(selectFS.value);
 })
 
 function loadData(fileSistem) {
 
     fetch(`/question${fileSistem}`)
+        .then((data) => data.json())
         .then((data) => {
-            return data.json()
-        })
-
-        .then((data) => {
-            console.log(data)
             questionData[fileSistem] = data;
-           // console.log(data)
-            renderCards(data, fileSistem);
+
+            if(selectTheme.value === ignoreTheme) {
+                return renderCards(data, fileSistem);
+            }
+
+            const filteredByThemeData = data.filter(({theme}) => theme === selectTheme.value);
+            renderCards(filteredByThemeData, fileSistem);
         })
         .catch((e) => {
-            console.log(e);
+            console.error(e);
         })
 }
-
-loadData('JSON');
 
 
 /* (если число меньше десяти, перед числом добавляем ноль) */
@@ -89,7 +97,7 @@ function deleteQuestion(id, fileSistem) {
 
     })
     questionData[fileSistem].splice(indexId, 1); // начиная с позиции 1, удалить 1 элемент
-    console.log(questionData, fileSistem, indexId)
+    //console.log(questionData, fileSistem, indexId)
 
     fetch(`/question${fileSistem}`, {
         method: 'POST',
@@ -145,122 +153,19 @@ let addFSArr = []
 
 })
 
+document.addEventListener('DOMContentLoaded', () => {
+    try{
+        const localStorageFileSystemValue = localStorage.getItem('fileSystem');
+        const localStorageThemeValue = localStorage.getItem('selectTheme');
 
+        if(localStorageFileSystemValue) selectFS.value = localStorageFileSystemValue;
+        if(localStorageThemeValue) selectTheme.value = localStorageThemeValue;
 
+        const currentFileSystemValue = selectFS.value;
 
+        loadData(currentFileSystemValue);
+    } catch(e){
+        console.error(e);
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function loadData() {
-//     fetch('/questionJson')
-//         .then((data) => {
-//             return data.json()
-//         })
-//         .then((data) => {
-//             developersArr = data;
-//
-//             renderCards(data);
-//         })
-//         .catch((e) => {
-//             console.log(e);
-//         })
-// }
-//
-// loadData();
-//
-// editData();
-//
-//
-// function editData(id) {
-//
-//     questionField.value = ''
-//     choiceOfTheme.value = ''
-//     answer.value = ''
-//     date.getDate();
-//     form.style.display = 'block';
-// }
-//
-// form.addEventListener('submit', (e) => {
-//     e.preventDefault();
-//
-//     const updatedData = {
-//         id: +idInput.value,
-//         Text: questionField.value,
-//         Theme: choiceOfTheme.value,
-//         Answer: answer.value,
-//         date: date.getDate()
-//     }
-//
-//     fetch('/questionJson', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(updatedData),
-//     }).then(() => {
-//         loadData();
-//         questionField.value = '';
-//         choiceOfTheme.value = '';
-//         answer.value = '';
-//         date.getDate();
-//
-//         form.style.display = 'none';
-//     });
-//
-// })
+})
