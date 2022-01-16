@@ -89,7 +89,7 @@ function deleteQuestion(id, fileSistem) {
 
     })
     questionData[fileSistem].splice(indexId, 1); // начиная с позиции 1, удалить 1 элемент
-    console.log(questionData, fileSistem, indexId)
+    //console.log(questionData, fileSistem, indexId)
 
     fetch(`/question${fileSistem}`, {
         method: 'POST',
