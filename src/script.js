@@ -34,18 +34,42 @@ loadData();
 
 function renderCards(data) {
   const cards = data.map((dev) => {
-    const avatarEl = dev.avatar ? `<img src="${dev.avatar}" class="avatar" width="300" height="300">` : '';
+    const avatarEl = dev.avatar ? `<img src="${dev.avatar}" class="avatar" width="150" height="150">` : '';
 
     return `<div class="card">
-
-                <div class="photo"><div>${avatarEl}</div></div>
-                <div class="describe">
-                    <div class="name">${dev.name}</div><div class="age">${dev.age}</div><div class="gender">${dev.gender}</div>
-                    <div class="city">${dev.city}</div><div class="activity">${dev.activity}</div><div class="company">${dev.company}</div>
-                    <div class="interests">${dev.interests}</div>
-                    <button class="edit-btn" onclick="editData(${dev.id})"><img src="image/pngegg.png" width="30px" alt=""></button>
+                <div class="user-card-header">
+                    <div class="name">${dev.name}</div>
+                    <button class="edit-btn" onclick="editData(${dev.id})"></button>
                 </div>
-                <br>
+                <div class="user-card-content">
+                    <div class="photo">${avatarEl}</div>
+                    <div class="describe">
+                        <div class="param-row age">
+                            <div class="param-name">Age:</div>
+                            <div class="param-value">${dev.age}</div>
+                        </div>
+                        <div class="param-row gender">
+                            <div class="param-name">Gender:</div>
+                            <div class="param-value">${dev.gender}</div>
+                         </div>
+                        <div class="param-row city">
+                            <div class="param-name">City:</div>
+                            <div class="param-value">${dev.city}</div>
+                        </div>
+                        <div class="param-row activity">
+                            <div class="param-name">Activity:</div>
+                            <div class="param-value">${dev.activity}</div>
+                        </div>
+                        <div class="param-row company">
+                            <div class="param-name">Company:</div>
+                            <div class="param-value">${dev.company}</div>
+                        </div>
+                        <div class="param-row interests">
+                            <div class="param-name">Interests:</div>
+                            <div class="param-value">${dev.interests}</div>
+                        </div>
+                    </div>
+                </div>
             </div>`
   }).join('');
 
