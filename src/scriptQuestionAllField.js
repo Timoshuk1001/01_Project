@@ -16,10 +16,12 @@ const btnCancel = document.querySelector('.btn--cancel');
 const btnCreate = document.querySelector('.btn--create'); // кнопка создания темы
 const selectFS = document.getElementById('selectorFile');
 const selectTheme = document.getElementById('selectorQuestion');
+const confirmDel = document.getElementById('confirmDel');
+const cancelDel = document.getElementById('cancelDel');
+const modal = document.getElementById('modal');
 
 selectFS.addEventListener('change', (el) => {
     const value = el.target.value;
-
     localStorage.setItem('fileSystem', value);
     loadData(value);
 });
@@ -31,18 +33,18 @@ selectTheme.addEventListener('change', (e) => {
 
 function loadData(fileSystem) {
 
-
     fetch(`/question${fileSystem}`)
         .then((data) => data.json())
         .then((data) => {
             questionData[fileSystem] = data;
 
-            if(selectTheme.value === ignoreTheme) {
-                return renderCards(data, fileSystem);
+            if(selectFS.value === fileSystem) {
+                renderCards(data, fileSystem);
             }
-
-            const filteredByThemeData = data.filter(({theme}) => theme === selectTheme.value);
-            renderCards(filteredByThemeData, fileSystem);
+            if(selectTheme.value !== ignoreTheme) {
+                const filteredByThemeData = data.filter(({theme}) => theme === selectTheme.value);
+                renderCards(filteredByThemeData, fileSystem);
+            }
 
 
         })
@@ -51,9 +53,7 @@ function loadData(fileSystem) {
         })
 }
 
-
 // loadData('JSON')
-
 
 /* (если число меньше десяти, перед числом добавляем ноль) */
 function zero_first_format(value)
@@ -81,15 +81,15 @@ function date_time()
 
 
 function renderCards(data, fileSystem) {
+    console.log(fileSystem)
     const cards = data.map((quest) => {
          return `<div class="questions">
 
-                    <span class="text">${quest.question}</div>
-                    <span class="theme">${quest.theme}</span>
-                    <span class="answer">${quest.answer}</span>
-                    <span class="date">${quest.date}</span>
-                    <button onclick="deleteQuestion(${quest.id}, '${fileSystem}')">DELETE</button>
-                     
+                    <div class="text">${quest.question}</div>
+                    <div class="theme">${quest.theme}</div>
+                    <div class="answer">${quest.answer}</div>
+                    <div class="date">${quest.date}</div>
+                    <button onclick="openModal(${quest.id}, '${fileSystem}')">DELETE</button>
                     <br>
                </div>`
      }).join('');
@@ -99,16 +99,31 @@ function renderCards(data, fileSystem) {
         list.innerHTML = '<h4 id="ifNoQuestion">There are no questions</h4>'
     }
 }
+function openModal(id, fileSystem) {
+   confirmDel.dataset.id = id;
+    confirmDel.dataset.fileSystem = fileSystem;
+    modal.classList.add('active');
+}
+
+confirmDel.addEventListener('click', () => {
+    const delId = +confirmDel.dataset.id;
+    const delFS = confirmDel.dataset.fileSystem;
+    modal.classList.remove('active');
+    deleteQuestion(delId, delFS);
+})
+cancelDel.addEventListener('click', () => {
+    confirmDel.dataset.id = null;
+    confirmDel.dataset.fileSystem = null;
+    modal.classList.remove('active');
+})
+
 
 function deleteQuestion(id, fileSystem) {
     const indexId = questionData[fileSystem].findIndex((obj) => {
         return id === obj.id;
-
     })
-
     questionData[fileSystem].splice(indexId, 1); // начиная с позиции 1, удалить 1 элемент
-    //console.log(questionData, fileSystem, indexId)
-
+    console.log(questionData, fileSystem, indexId)
 
     fetch(`/question${fileSystem}`, {
         method: 'POST',
