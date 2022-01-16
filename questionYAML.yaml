@@ -1,1 +1,11 @@
-[]
+
+  - id: 0
+    question: "Это важно для оптимизации сайта и доступности."
+    theme: "Meta-Tags"
+    answer: "True"
+    date: "17.01.2022 00:24:40"
+  - id: 1
+    question: "Считалось багом"
+    theme: "Margin Collapsing"
+    answer: "True"
+    date: "17.01.2022 00:26:44"
