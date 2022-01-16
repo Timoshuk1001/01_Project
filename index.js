@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const multer  = require('multer');
 const fs = require('fs');
 const path = require('path');
+const yamlParser = require("js-yaml");
+const YAML = require("json-to-pretty-yaml");
 
 
 
@@ -104,6 +106,29 @@ app.post('/questionJSON', urlencodedParser, (req, res) => {
   res.sendStatus(200);
 
 })
+
+//Data questionYAML
+app.get('/questionYAML', (req, res) => {
+  const str = fs.readFileSync('./questionYAML.yaml', 'utf8');
+  const arr = yamlParser.load(str);
+  console.log(arr)
+
+  res.set({
+    "Content-Type": "application/json",
+  });
+
+  res.json(arr)
+})
+
+
+app.post('/questionYAML', urlencodedParser, (req, res) => {
+  if(!req.body) return res.sendStatus(400);
+
+  fs.writeFileSync('./questionYAML.yaml', YAML.stringify(req.body), 'utf8'); // записывает в обновленный массив
+  res.sendStatus(200);
+})
+
+
 
 //Data questionCSV
 app.get('/questionCSV', (req, res) => {
