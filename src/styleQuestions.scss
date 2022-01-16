@@ -303,6 +303,10 @@ body {
     border-radius: 5px;
 }
 
+.btn--create:disabled {
+    background-color: initial;
+    box-shadow: initial;
+}
 
 .popup__area {
     position: absolute;

@@ -1,5 +1,6 @@
 const txtLimit = questionField.getAttribute("maxlength");
 const txtCounter = document.querySelector(".texrarea__counter span");
+const form = document.querySelector("#edit-form")
 txtCounter.innerHTML = txtLimit;
 
 // Очищаем все поля при нажатии на кнопку cancel
@@ -27,6 +28,7 @@ btnCreate.addEventListener("click", function (e){
 // вешаем проверку заполнения всех полей
 function inputQuestionFocus(){
 
+
     const mainFormInputPlaceholder = questionField.placeholder;
     questionField.addEventListener("focus", function (e){
         questionField.placeholder = ""
@@ -41,6 +43,8 @@ inputQuestionFocus(); // получаем фокус и анфокус на ок
 
 // поебать мозга над заполнение всех полей ввода
 btnCreate.addEventListener('click', function (e){
+
+
 
     if(questionField.value === ''){
         alert ("Уважаемый! Поле Question не заполнено")
@@ -59,27 +63,24 @@ btnCreate.addEventListener('click', function (e){
 //     return false;
 // });
 
-document.forms[0].onsubmit = function() {
+form.addEventListener('change', function (e) {
+    const question = document.querySelector('#formName')
+    const theme = document.querySelector('#formTheme')
+    const answer = document.querySelector('input[name=answer]:checked')
+    const fileSystem = document.querySelector('input[name=checkbox]:checked')
 
-    const radioElems = document.querySelectorAll('.radio'),
-        error = document.querySelector('.error');
-    submit = false;
-
-    [].forEach.call(radioElems, function(item) {
-        item.checked && (submit = true);
-    });
-    if (!submit) {
-        error.style.display = 'block';
-
-        return alert ("Уважаемый! Поле Answer не заполнено");
+    if (question.value.length > 0 && theme.value !== '0' && answer && fileSystem) {
+        btnCreate.removeAttribute('disabled')
+    } else {
+        btnCreate.setAttribute('disabled', true)
     }
-};
+});
 
 btnCreate.addEventListener('click', function (e){
 
-    let c= document.getElementsByTagName('input');
-    for (let i = 0; i<c.length; i++){
-        if (c[i].type=='checkbox')
+    let c = document.getElementsByTagName('input');
+    for (let i = 0; i < c.length; i++){
+        if (c[i].type === 'checkbox')
         {
             if (c[i].checked){return true}
         }
