@@ -40,55 +40,54 @@
             <form id="edit-dev" style="display: none" class="edit-dev">
                 <div class="edit-dev-form">
                     <input type="hidden" name="id" id="edit-id">
+<div class="form">
+    <h1 class="form__title">Изменить данные</h1>
+    <div class="form__item">
+        <label class="form__label">Имя:</label>
+        <input type="text" name="name" id="edit-name" class="edit-name">
+    </div>
 
+    <div class="form__item">
+        <label class="form__label">Возраст:</label>
+        <input type="number" name="age" id="edit-age" class="edit-age">
+    </div>
 
+    <div class="form__item">
+        <label class="form__label">Пол:</label>
+        <input type="text" name="gender" id="edit-gender" class="edit-gender">
+    </div>
 
+    <div class="form__item">
+        <label class="form__label">Город:</label>
+        <input type="text" name="city" id="edit-city" class="edit-city">
+    </div>
 
-                    <h1 class="form__title">Изменить данные</h1>
-                    <div class="form__item">
-                        <label class="form__label">Имя:</label>
-                        <input type="text" name="name" id="edit-name" class="edit-name">
-                    </div>
+    <div class="form__item">
+        <label class="form__label">Вид деятельности:</label>
+        <input type="text" name="activity" id="edit-activity" class="edit-activity">
+    </div>
 
-                    <div class="form__item">
-                        <label class="form__label">Возраст:</label>
-                        <input type="number" name="age" id="edit-age" class="edit-age">
-                    </div>
+    <div class="form__item">
+        <label class="form__label">Компания:</label>
+        <input type="text" name="company" id="edit-company" class="edit-company">
+    </div>
 
-                    <div class="form__item">
-                        <label class="form__label">Пол:</label>
-                        <input type="text" name="gender" id="edit-gender" class="edit-gender">
-                    </div>
+    <div class="form__item">
+        <label class="form__label">Хобби:</label>
+        <input type="text" name="interests" id="edit-interests" class="edit-interests">
+    </div>
 
-                    <div class="form__item">
-                        <label class="form__label">Город:</label>
-                        <input type="text" name="city" id="edit-city" class="edit-city">
-                    </div>
+    <div class="form__item">
+        <div class="form__label--file">Прикрепить фото</div>
+        <div class="file">
+            <div class="file__item">
+                <input accept=".jpg, .png, .gif" type="file" name="avatar" id="edit-avatar" class="file__input">
+                <div class="file__button">Выбрать</div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                    <div class="form__item">
-                        <label class="form__label">Вид деятельности:</label>
-                        <input type="text" name="activity" id="edit-activity" class="edit-activity">
-                    </div>
-
-                    <div class="form__item">
-                        <label class="form__label">Компания:</label>
-                        <input type="text" name="company" id="edit-company" class="edit-company">
-                    </div>
-
-                    <div class="form__item">
-                        <label class="form__label">Хобби:</label>
-                        <input type="text" name="interests" id="edit-interests" class="edit-interests">
-                    </div>
-
-                    <div class="form__item">
-                        <div class="form__label--file">Прикрепить фото</div>
-                        <div class="file">
-                            <div class="file__item">
-                                <input accept=".jpg, .png, .gif" type="file" name="avatar" id="edit-avatar" class="file__input">
-                                <div class="file__button">Выбрать</div>
-                            </div>
-                        </div>
-                    </div>
 
                     <div><button type="submit" class="submit-and-close">Отправить</button></div>
                     <div class="pop_up_close">&#10006</div>
