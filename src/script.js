@@ -1,5 +1,8 @@
-let developersArr = null;
+document.addEventListener("DOMContentLoaded", function (event) {
+  console.log("DOM fully loaded and parsed");
+});
 
+let developersArr = null;
 const avatarInput = document.getElementById('edit-avatar')
 const nameInput = document.getElementById('edit-name')
 const ageInput = document.getElementById('edit-age')
@@ -79,7 +82,6 @@ function renderCards(data) {
 function editData(id) {
   const dev = developersArr[id];
 
-  // avatarInput.value = dev.avatar;
   nameInput.value = dev.name;
   ageInput.value = dev.age;
   genderInput.value = dev.gender;

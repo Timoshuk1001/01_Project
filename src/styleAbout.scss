@@ -19,31 +19,7 @@ body {
     margin: 0 auto;
 }
 
-@media (max-width: 1920px) {
-    .container {
-        max-width: 1690px;
 
-    }
-}
-
-@media (max-width: 1600px) {
-    .container {
-        max-width: 1370px;
-
-    }
-}
-
-@media (max-width: 1440px) {
-    .container {
-        max-width: none;
-    }
-}
-
-@media (max-width: 1440px) {
-    .header__teamName {
-        text-align: center;
-    }
-}
 .header {
     margin: 0 auto;
     padding: 0 95px 0 20px;
@@ -85,39 +61,41 @@ body {
 }
 .menu {
     display: flex;
-}
-.menu__item {
-    text-align: center;
-    line-height: 40px;
-    width: 100%;
-    color: #fff;
-    font-size: 20px;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-decoration: none;
-}
 
-.menu__m1 {
-    background: #5261a5;
-}
-.menu__m2 {
-    background: #ee7e06;
-}
-.menu__m3 {
-    background: #ef2b39;
-}
-.menu__m1:hover {
-    background: #4e61c1;
-}
-.menu__m2:hover {
-    background: #f88102;
-}
-.menu__m3:hover {
-    background: #ea3c48;
-}
-.main {
-    color: black;
-    margin-top: 40px;
+    &__item {
+        text-align: center;
+        line-height: 40px;
+        width: 100%;
+        color: #fff;
+        font-size: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-decoration: none;
+    }
+
+    &__m1 {
+        background: #5261a5;
+
+        &:hover {
+            background: #4e61c1;
+        }
+    }
+
+    &__m2 {
+        background: #ee7e06;
+
+        &:hover {
+            background: #f88102;
+        }
+    }
+
+    &__m3 {
+        background: #ef2b39;
+
+        &:hover {
+            background: #ea3c48;
+        }
+    }
 }
 .main__head {
     text-align: center;
@@ -150,4 +128,30 @@ body {
 
 .line-through {
     text-decoration: line-through;
+}
+
+@media (max-width: 1920px) {
+    .container {
+        max-width: 1690px;
+
+    }
+}
+
+@media (max-width: 1600px) {
+    .container {
+        max-width: 1370px;
+
+    }
+}
+
+@media (max-width: 1440px) {
+    .container {
+        max-width: none;
+    }
+}
+
+@media (max-width: 1440px) {
+    .header__teamName {
+        text-align: center;
+    }
 }

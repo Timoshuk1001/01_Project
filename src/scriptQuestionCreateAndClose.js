@@ -28,7 +28,6 @@ btnCreate.addEventListener("click", function (e){
 // вешаем проверку заполнения всех полей
 function inputQuestionFocus(){
 
-
     const mainFormInputPlaceholder = questionField.placeholder;
     questionField.addEventListener("focus", function (e){
         questionField.placeholder = ""
@@ -39,29 +38,6 @@ function inputQuestionFocus(){
     });
 }
 inputQuestionFocus(); // получаем фокус и анфокус на окне ввода вопроса
-
-
-// поебать мозга над заполнение всех полей ввода
-btnCreate.addEventListener('click', function (e){
-
-
-
-    if(questionField.value === ''){
-        alert ("Уважаемый! Поле Question не заполнено")
-    }
-
-    return false;
-
-});
-//
-// btnCreate.addEventListener('click', function (e){
-//
-//     if(choiceOfTheme.value === ''){
-//         alert ("Уважаемый! Поле Theme не заполнено")
-//     }
-//
-//     return false;
-// });
 
 form.addEventListener('change', function (e) {
     const question = document.querySelector('#formName')
@@ -76,23 +52,8 @@ form.addEventListener('change', function (e) {
     }
 });
 
-btnCreate.addEventListener('click', function (e){
-
-    let c = document.getElementsByTagName('input');
-    for (let i = 0; i < c.length; i++){
-        if (c[i].type === 'checkbox')
-        {
-            if (c[i].checked){return true}
-        }
-    }
-
-    return alert ("Уважаемый! Поле File system не заполнено");
-});
-
-
 const openPopUp = document.getElementById('open_pop_up');
 const closePopUp = document.getElementById('pop_up_close');
-
 const popUp = document.getElementById('pop_up');
 const popuArea = document.querySelector('.popup__area')
 

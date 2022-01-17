@@ -1,5 +1,5 @@
-
-<body><id>0</id><question>Это важно для оптимизации сайта и доступности.</question><theme>Meta-Tags</theme><answer>True</answer><date>17.01.2022 00:24:40</date></body>
-<body><id>1</id><question>Считалось багом</question><theme>Margin Collapsing</theme><answer>True</answer><date>17.01.2022 00:26:44</date></body>
-
+<questions>
+<body><id>0</id><question>Модульное тестирование — это метод тестирования программного обеспечения при котором создаются модули, то есть небольшие части приложения, поведение каждого из которых проверяется отдельно.</question><theme>Unit Test</theme><answer>True</answer><date>17.01.2022 03:25:26</date></body>
+<body><id>1</id><question>Тег caption не является основным</question><theme>Element HTML</theme><answer>True</answer><date>17.01.2022 03:30:48</date></body>
+<body><id>2</id><question>border является параметром тега font</question><theme>Element HTML</theme><answer>False</answer><date>17.01.2022 03:33:05</date></body>
 </questions>

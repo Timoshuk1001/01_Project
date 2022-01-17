@@ -6,11 +6,9 @@ const questionData = {
     'YAML': []
 }
 const ignoreTheme = 'theme 0';
-
 const questionField = document.querySelector('.pop_up_question'); //поле ввода текста
 const choiceOfTheme = document.querySelector('.listSelector'); // выпадашка выбора тем
 const answer = document.querySelectorAll('input[type=radio]'); // кнопки тру фолз
-//const date = document.querySelector('date');
 const fileSystemArr = document.querySelectorAll('input[type=checkbox]'); // выбор файловой системы
 const btnCancel = document.querySelector('.btn--cancel');
 const btnCreate = document.querySelector('.btn--create'); // кнопка создания темы
@@ -53,7 +51,6 @@ function loadData(fileSystem) {
         })
 }
 
-// loadData('JSON')
 
 /* (если число меньше десяти, перед числом добавляем ноль) */
 function zero_first_format(value)
@@ -81,16 +78,20 @@ function date_time()
 
 
 function renderCards(data, fileSystem) {
-    console.log(fileSystem)
     const cards = data.map((quest) => {
         return `<div class="questions">
-
-                    <div class="text">${quest.question}</div>
-                    <div class="theme">${quest.theme}</div>
-                    <div class="answer">${quest.answer}</div>
-                    <div class="flex">
-                        <div class="date">${quest.date}</div>
-                        <button class="btnDel" onclick="deleteQuestion(${quest.id}, '${fileSystem}')">DELETE</button>
+                    <div class="questions-text">${quest.question}</div>
+                    <div class="questions__param">
+                        <div class="questions__param-name">Answer:</div>
+                        <div class="questions__param-value">${quest.answer}</div>
+                    </div>
+                    <div class="questions__foot">
+                        <div class="questions__param">
+                            <div class="questions__param-name">Theme:</div>
+                            <div class="questions__param-value">${quest.theme}</div>
+                        </div>
+                        <div class="questions__foot-date">${quest.date}</div>
+                        <button class="questions__btnDel" onclick="openModal(${quest.id}, '${fileSystem}')">✖</button>
                     </div>
                     <br>
                </div>`
@@ -124,8 +125,7 @@ function deleteQuestion(id, fileSystem) {
     const indexId = questionData[fileSystem].findIndex((obj) => {
         return id === obj.id;
     })
-    questionData[fileSystem].splice(indexId, 1); // начиная с позиции 1, удалить 1 элемент
-    console.log(questionData, fileSystem, indexId)
+    questionData[fileSystem].splice(indexId, 1); // начиная с позиции indexId, удалить 1 элемент
 
     fetch(`/question${fileSystem}`, {
         method: 'POST',
@@ -135,14 +135,13 @@ function deleteQuestion(id, fileSystem) {
         body: JSON.stringify(questionData[fileSystem]),
     }).then(() => {
         loadData(fileSystem);
-
     });
 }
 
 btnCreate.addEventListener('click', (e) => {
     e.preventDefault();
     let findInput =[...answer].find((input)=> input.checked)
-let addFSArr = []
+    let addFSArr = []
     let findFS = [...fileSystemArr].find((input) => {
         if (input.checked) {
          let addSystem = input.value;
@@ -150,7 +149,7 @@ let addFSArr = []
         }
 
     })
-    console.log(addFSArr)
+
     for (let i of addFSArr) {
         const updatedData = {
         id: +questionData[i].length,
@@ -161,8 +160,6 @@ let addFSArr = []
     }
 
     questionData[i].push(updatedData);
-
-
 
     fetch(`/question${i}`, {
         method: 'POST',
@@ -182,7 +179,7 @@ let addFSArr = []
 
 })
 
-
+//отслеживаем фильтры при открытии страницы, если их нет - откроет дефолтные, если в локал стореж записаны - то с хранилища
 document.addEventListener('DOMContentLoaded', () => {
     try{
         const localStorageFileSystemValue = localStorage.getItem('fileSystem');
