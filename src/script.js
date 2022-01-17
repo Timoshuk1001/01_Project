@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 });
 
 let developersArr = null;
-const avatarInput = document.getElementById('edit-avatar')
+
 const nameInput = document.getElementById('edit-name')
 const ageInput = document.getElementById('edit-age')
 const idInput = document.getElementById('edit-id')
@@ -116,10 +116,12 @@ submitAndCloseBtn.addEventListener('click',() =>{
 // крестик для закрытия мадалки ! = попапа
 const closePopUp = document.querySelector('.pop_up_close');
 const popUp = document.querySelector('.edit-dev-wrap');
+
 function openAndClose(){
   closePopUp.addEventListener('click', () => {
     popUp.classList.remove('active');
     document.body.classList.remove('hidden')
   })
 }
+
 openAndClose();

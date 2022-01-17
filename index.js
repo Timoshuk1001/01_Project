@@ -12,7 +12,7 @@ const urlencodedParser = express.urlencoded({extended: false});
 
 const app = express();
 
-var storage = multer.diskStorage({
+let storage = multer.diskStorage({
   destination: 'uploads/',
   filename: function (req, file, cb) {
     let extention = file.originalname.match(/(\.\w+)$/);
@@ -21,7 +21,7 @@ var storage = multer.diskStorage({
   }
 })
 
-var upload = multer({ storage: storage });
+let upload = multer({ storage: storage });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -89,7 +89,6 @@ app.post('/developers', upload.single('avatar'), function (req, res) {
 
 //Data questionJson
 app.get('/questionJSON', (req, res) => {
-  //let questionJson = [];
   const questsFile = JSON.parse(fs.readFileSync('./questionJson.json', 'utf8'));
 
   res.set({
@@ -134,7 +133,6 @@ app.post('/questionYAML', urlencodedParser, (req, res) => {
 app.get('/questionCSV', (req, res) => {
   const str = fs.readFileSync('./questionCSV.csv', 'utf8');
   const arr = csv2arrParser(str);
-  //res.send(str);
 
   res.set({
     "Content-Type": "application/json",
@@ -185,7 +183,6 @@ function csv2arrParser(string) {
 }
 
 app.post('/questionCSV', urlencodedParser, (req, res) => {
-  //console.log(req.body)
   if(!req.body) return res.sendStatus(400);
   fs.writeFileSync('./questionCSV.csv', arr2csvParser(req.body), 'utf-8'); // записывает в обновленный массив
   res.sendStatus(200);
@@ -249,7 +246,6 @@ function parseXml(xml) {
 
 
 app.post('/questionXML', urlencodedParser, (req, res) => {
-  console.log(req.body)
   if(!req.body) return res.sendStatus(400);
   fs.writeFileSync('./questionXML.xml', convertToXML(req.body), 'utf-8'); // записывает в обновленный массив
   res.sendStatus(200);
@@ -257,11 +253,6 @@ app.post('/questionXML', urlencodedParser, (req, res) => {
 })
 
 
-
-
-
-
-///
 app.listen(3000, () => {
   console.log(`Example app listening at http://localhost:3000`)
 });
